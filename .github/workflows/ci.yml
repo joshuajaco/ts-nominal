@@ -1,0 +1,22 @@
+name: CI
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["**"]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version-file: [".tool-versions"]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js from ${{ matrix.node-version-file }}
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: ${{ matrix.node-version-file }}
+          cache: "npm"
+      - run: npm ci
+      - run: npm run format:check
+      - run: npm test

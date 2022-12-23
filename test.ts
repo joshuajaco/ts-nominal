@@ -23,6 +23,14 @@ barFn(createBar(""));
 fooFn(nominal<FooString>(""));
 barFn(nominal<BarString>(""));
 
+assert.strictEqual(nominal<FooString>("foo"), "foo");
+
+type Foo = Nominal<{ foo: string }, typeof FOO>;
+const foo = { foo: "bar" };
+assert.strictEqual(nominal<Nominal<Foo, typeof FOO>>(foo), foo);
+
+expectType<(_: string) => FooString>(nominal<FooString>);
+
 // @ts-expect-error
 nominal<FooString>(1);
 // @ts-expect-error
@@ -44,12 +52,17 @@ createFoo(1);
 // @ts-expect-error
 fooFn(barString);
 
-expectType<(_: string) => FooString>(nominal<FooString>);
+// @ts-expect-error
+nominal();
+// @ts-expect-error
+nominal(0);
+// @ts-expect-error
+nominal<any>(0);
+// @ts-expect-error
+nominal<unknown>(0);
+// @ts-expect-error
+nominal<never>(0);
+
 expectType<TypeEqual<typeof nominal<never>, (_: never) => never>>(true);
 expectType<TypeEqual<Parameters<typeof nominal>, never>>(true);
-
-assert.strictEqual(nominal<FooString>("foo"), "foo");
-
-type Foo = Nominal<{ foo: string }, typeof FOO>;
-const foo = { foo: "bar" };
-assert.strictEqual(nominal<Nominal<Foo, typeof FOO>>(foo), foo);
+expectType<TypeEqual<Nominal<any, any>, never>>(true);

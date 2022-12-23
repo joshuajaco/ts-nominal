@@ -1,6 +1,8 @@
 {
   "name": "ts-nominal",
   "version": "0.0.1",
+  "repository": "joshuajaco/ts-nominal",
+  "license": "MIT",
   "exports": "./dist/index.js",
   "main": "./dist/index.js",
   "files": [

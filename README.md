@@ -57,6 +57,10 @@ type FooString = Nominal<string, typeof __FOO_STRING_ID>;
 
 const foo: FooString = nominal<FooString>("foo");
 
+// create a factory by only providing the type argument
+const createFoo = nominal<FooString>;
+const foo2 = createFoo("foo2");
+
 // comparisons still function as usual
 foo === "foo"; // true
 foo === "bar"; // false

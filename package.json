@@ -1,6 +1,12 @@
 {
   "name": "ts-nominal",
   "version": "0.0.1",
+  "keywords": [
+    "typescript",
+    "nominal",
+    "nominal-types",
+    "nominal-typing"
+  ],
   "repository": "joshuajaco/ts-nominal",
   "license": "MIT",
   "exports": "./dist/index.js",
